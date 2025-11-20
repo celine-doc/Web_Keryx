@@ -1,39 +1,37 @@
 <?php
 require_once __DIR__ . "/dbConfig.php";
 
-function creerMessage($data){
+function creerMessage($data) {
+    $texte   = $data["texte"] ?? "";
+    $type    = $data["type"] ?? "Texte";
+    $auteur  = $data["auteur"] ?? "";
+    $media   = $data["media"] ?? null;
 
-$texte = $data["texte"] ?? "";
-$type  = $data["type"] ?? "Texte";
-$troncon = $data["troncon"] ?? "";
-$auteur = $data["auteur"] ?? "";
+    if ($texte === "" || $auteur === "") {
+        return ["success" => false, "error" => "Champs manquants"];
+    }
 
-if ($texte === "" || $auteur === "" || $troncon === "") {
-    echo json_encode(["success" => false, "error" => "Champs manquants"]);
-    exit;
-}
+    $db = getDb();
 
-$db = getDb();
+    // INSERT dans la table message
+    $sql = "
+        INSERT INTO message (texte_message, type_message, auteur_message, id_media)
+        VALUES ($1, $2, $3, $4)
+        RETURNING code_message
+    ";
 
-// INSERT message
-$sql = "
-    INSERT INTO message (texte_message, type_message, auteur_message)
-    VALUES ($1, $2, $3)
-    RETURNING code_message
-";
+    $params = [$texte, $type, $auteur, $media];
+    $result = pg_query_params($db, $sql, $params);
 
-$result = pg_query_params($db, $sql, [$texte, $type, $auteur]);
+    if (!$result) {
+        return ["success" => false, "error" => pg_last_error($db)];
+    }
 
-if (!$result) {
-    echo json_encode(["success" => false, "error" => pg_last_error()]);
-    exit;
-}
+    $row = pg_fetch_assoc($result);
 
-$row = pg_fetch_assoc($result);
-
-echo json_encode([
-    "success" => true,
-    "code_message" => $row["code_message"]
-]);
+    return [
+        "success" => true,
+        "code_message" => $row["code_message"]
+    ];
 }
 ?>

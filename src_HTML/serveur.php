@@ -1,28 +1,37 @@
 <?php
-
 header("Content-Type: application/json");
 
-$input = json_decode(file_get_contents("php://input"), true);
-$action = $input["action"] ?? null;
-$data = $input["data"] ?? [];
+$action = $_POST['action'] ?? '';
+
+$data = $_POST;
 
 switch ($action) {
 
-    case "get_troncons":
-        require __DIR__ . "/include/getTroncons.php";
+    case 'login':
+        require_once __DIR__ . '/include/login.php';
+        $res = login([
+            'identifiant' => $data['identifiant'] ?? '',
+            'password' => $data['password'] ?? ''
+        ]);
+        echo json_encode($res);
         break;
 
-    case "creerMessage":
-        require __DIR__ . "/include/creerMessage.php";
-        creerMessage($data);
+    case 'creerMessage':
+        require_once __DIR__ . '/include/creerMessage.php';
+        creerMessage([
+            'texte'   => $data['texte'] ?? '',
+            'type'    => $data['type'] ?? 'Texte',
+            'troncon' => $data['troncon'] ?? '',
+            'auteur'  => $data['auteur'] ?? '',
+            'media'   => $data['media'] ?? null
+        ]);
         break;
 
-    case "login":
-        require __DIR__ ."/include/login.php";
-        login($data);
+    case 'get_troncons':
+        require_once __DIR__ . '/include/getTroncons.php';
         break;
-    
+
     default:
-        echo json_encode(["success" => false, "error" => "Action inconnue"]);
+        echo json_encode(['success' => false, 'error' => 'Action inconnue']);
 }
 ?>

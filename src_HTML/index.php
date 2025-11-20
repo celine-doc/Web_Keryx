@@ -1,64 +1,28 @@
+
 <?php
 session_start();
 
 $message = "";
 
-// URL du serveur REST
-$serveur_url = "https://keryx.alwaysdata.net/serveur.php";
-
-/**
- * Appelle le serveur via HTTP POST JSON
- */
-function appelerServeur($action, $data = []) {
-    global $serveur_url;
-
-    $payload = json_encode([
-        "action" => $action,
-        "data"   => $data
-    ]);
-
-    // Chemin vers le certificat CA si HTTPS
-    $cafile = 'cacert.pem';
-
-    $context = stream_context_create([
-        'http' => [
-            'method'  => 'POST',
-            'header'  => "Content-Type: application/json\r\n",
-            'content' => $payload,
-            'timeout' => 10
-        ],
-        'ssl' => [
-            'cafile'           => $cafile,
-            'verify_peer'      => true,
-            'verify_peer_name' => true
-        ]
-    ]);
-
-    $response = @file_get_contents($serveur_url, false, $context);
-    if ($response === false) {
-        $error = error_get_last();
-        return ["success"=>false,"error"=>"Impossible de contacter le serveur : ".($error['message'] ?? "Erreur inconnue")];
-    }
-
-    $decoded = json_decode($response, true);
-    if (!is_array($decoded)) return ["success"=>false,"error"=>"Réponse invalide du serveur"];
-    return $decoded;
-}
-
 // --- TRAITEMENT DU FORMULAIRE ---
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $identifiant = trim($_POST["user"]);
-    $mdp         = trim($_POST["password"]);
 
-    $res = appelerServeur("login", [
+    // Inclure le serveur et login directement
+    require_once __DIR__ . "/include/login.php";
+
+    $identifiant = trim($_POST["user"] ?? '');
+    $mdp         = trim($_POST["password"] ?? '');
+
+    // Appel direct de la fonction login
+    $res = login([
         "identifiant" => $identifiant,
         "password"    => $mdp
     ]);
 
     if (!isset($res["success"]) || !$res["success"]) {
         $message = "<p style='color:red;text-align:center;'>"
-                . htmlspecialchars($res["error"] ?? "Erreur serveur")
-                . "</p>";
+                 . htmlspecialchars($res["error"] ?? "Erreur serveur")
+                 . "</p>";
     } else {
         $_SESSION["user_id"]   = $res["user"]["code"];
         $_SESSION["user_name"] = $res["user"]["prenom"] . " " . $res["user"]["nom"];
@@ -67,6 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="fr">

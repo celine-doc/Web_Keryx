@@ -1,119 +1,94 @@
 <?php
 session_start();
 
-$serveur_url = "https://keryx.alwaysdata.net/serveur.php";
-
-function appelerServeur($action, $data = []) {
-    global $serveur_url;
-
-    $payload = json_encode([
-        "action" => $action,
-        "data"   => $data
-    ]);
-
-    $context = stream_context_create([
-    'http' => [
-        'method'  => 'POST',
-        'header'  => "Content-Type: application/json\r\n",
-        'content' => $payload,
-        'timeout' => 10
-    ],
-    'ssl' => [
-        'verify_peer' => false,
-        'verify_peer_name' => false
-    ]
-]);
-
-
-    $result = file_get_contents($serveur_url, false, $context);
-    return json_decode($result, true);
-}
-
-// Récupération tronçons :
-$troncons = appelerServeur("get_troncons")["troncons"] ?? [];
-
 $confirmation = "";
 $erreur = "";
 
-// Soumission formulaire
+// Récupération des tronçons directement depuis la fonction PHP
+require_once __DIR__ . "/include/recupTroncons.php";
+$tronconsRes = getTroncons();
+
+$troncons = $tronconsRes["troncons"] ?? [];
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
     $media_id = null;
 
-    // Gestion de l'image si upload
     if (!empty($_FILES["media_image"]["tmp_name"])) {
+        require_once __DIR__ . "/include/creerMedia.php";
         $img_data = file_get_contents($_FILES["media_image"]["tmp_name"]);
         $img_name = $_FILES["media_image"]["name"];
         $img_size = $_FILES["media_image"]["size"];
 
-        $media_res = appelerServeur("create_media", [
+        $media_res = creerMedia([
             "nom_fichier" => $img_name,
             "donnees"     => base64_encode($img_data),
             "taille"      => $img_size
         ]);
 
-        if ($media_res["success"]) {
+        if (!empty($media_res["success"])) {
             $media_id = $media_res["code_media"];
         } else {
-            $erreur = "Erreur upload image : " . $media_res["error"];
+            $erreur = "Erreur upload image : " . ($media_res["error"] ?? "Erreur inconnue");
         }
     }
 
     if (empty($erreur)) {
-        $data = [
+        require_once __DIR__ . "/include/creerMessage.php";
+
+        $res = creerMessage([
             "texte"   => $_POST["texte"],
             "type"    => $_POST["type"],
             "troncon" => $_POST["troncon"],
             "auteur"  => $_SESSION["user_id"],
             "media"   => $media_id
-        ];
+        ]);
 
-        $res = appelerServeur("creerMessage", $data);
-
-        if ($res["success"]) {
+        if (!empty($res["success"])) {
             $confirmation = "Message créé, code = " . $res["code_message"];
         } else {
-            $erreur = "Erreur : " . $res["error"];
+            $erreur = "Erreur : " . ($res["error"] ?? "Erreur inconnue");
         }
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html>
-<head><meta charset="UTF-8"><title>Créer un message</title></head>
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="./css/styles.css"/>
+    <link rel="shortcut icon" type="image/jpg" href="./images/favicon.jpg"/>
+    <title>Accueil - Kéryx</title>
+</head>
 <body>
-
-<h1>Créer un message</h1>
 
 <?php if (!empty($confirmation)) echo "<p style='color:green'>$confirmation</p>"; ?>
 <?php if (!empty($erreur)) echo "<p style='color:red'>$erreur</p>"; ?>
+<section>
+    <form method="post" enctype="multipart/form-data">
+    <label>Entrez le message ici</label>
+    <textarea name="texte" required></textarea><br>
 
-<form method="post" enctype="multipart/form-data">
-
-    <label>Texte :</label><br>
-    <textarea name="texte" required></textarea><br><br>
-
-    <label>Type :</label>
+    <label>Type de message</label>
     <select name="type">
         <option value="Texte">Texte</option>
+        
         <option value="TexteEtImage">Texte + Image</option>
-    </select><br><br>
-
-    <label>Tronçon :</label>
+    </select>
+    <label>Liste des tronçons</label>
     <select name="troncon" required>
         <?php foreach ($troncons as $t): ?>
-            <option value="<?= htmlspecialchars($t["code_troncon"]) ?>">
-                <?= htmlspecialchars($t["nom_troncon"]) ?>
-            </option>
+            <option value="<?= htmlspecialchars($t["code_troncon"]) ?>"><?= htmlspecialchars($t["nom_troncon"]) ?></option>
         <?php endforeach; ?>
-    </select><br><br>
+    </select>
 
-    <label>Image (optionnel) :</label><br>
-    <input type="file" name="media_image" accept="image/*"><br><br>
-
+    <label>Image</label>
+    <input type="file" name="media_image" accept="image/*"><br>
     <button type="submit">Créer</button>
+    </form>
 
-</form>
-
+</section>
 </body>
 </html>
+
