@@ -17,7 +17,7 @@ function creerMessage($data) {
     $sql = "
         INSERT INTO message (texte_message, type_message, auteur_message, id_media)
         VALUES ($1, $2, $3, $4)
-        RETURNING code_message
+        RETURNING texte_message
     ";
 
     $params = [$texte, $type, $auteur, $media];
@@ -31,7 +31,7 @@ function creerMessage($data) {
 
     return [
         "success" => true,
-        "code_message" => $row["code_message"]
+        "texte_message" => $row["texte_message"]
     ];
 }
 ?>

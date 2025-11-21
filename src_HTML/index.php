@@ -1,9 +1,9 @@
-
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 $message = "";
-
 // --- TRAITEMENT DU FORMULAIRE ---
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
@@ -121,7 +121,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         
           <p>
               Bonjour <?= htmlspecialchars($_SESSION["user_name"]) ?> ! Si vous vous êtes déja connecté vous pouvez
-              <a href="message.php">Créer un nouveau message</a>
+              <a href="message.php">Créer un nouveau message</a> ou <a href="campagne.php">Gérer les campagnes</a>
           </p>
 
     </section>

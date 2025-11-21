@@ -4,7 +4,6 @@ session_start();
 $confirmation = "";
 $erreur = "";
 
-// Récupération des tronçons directement depuis la fonction PHP
 require_once __DIR__ . "/include/recupTroncons.php";
 $tronconsRes = getTroncons();
 
@@ -45,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         ]);
 
         if (!empty($res["success"])) {
-            $confirmation = "Message créé, code = " . $res["code_message"];
+            $confirmation = "Message créé, message = " . $res["texte_message"];
         } else {
             $erreur = "Erreur : " . ($res["error"] ?? "Erreur inconnue");
         }
@@ -59,12 +58,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="stylesheet" href="./css/styles.css"/>
     <link rel="shortcut icon" type="image/jpg" href="./images/favicon.jpg"/>
-    <title>Accueil - Kéryx</title>
+    <title>Gestion des messages</title>
+    <style>
+        .bon{
+            color: green;
+        }
+        .erreur{
+            color: red;
+        }
+    </style>
 </head>
 <body>
 
-<?php if (!empty($confirmation)) echo "<p style='color:green'>$confirmation</p>"; ?>
-<?php if (!empty($erreur)) echo "<p style='color:red'>$erreur</p>"; ?>
+<?php if (!empty($confirmation)) echo "<p class=bon'>$confirmation</p>"; ?>
+<?php if (!empty($erreur)) echo "<p class=erreur'>$erreur</p>"; ?>
 <section>
     <form method="post" enctype="multipart/form-data">
     <label>Entrez le message ici</label>
