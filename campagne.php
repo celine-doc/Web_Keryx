@@ -52,6 +52,9 @@ $campagnes = $campagnesRes["success"] ? $campagnesRes["campagnes"] : [];
 </head>
 <body>
     <header>
+		<div class="header-left">
+        <a href="a_propos.php" class="logo">À propos du site</a>
+      </div>
     <nav>
       <ul>
         <li><a href="index.php">Accueil</a></li>
@@ -124,6 +127,7 @@ $campagnes = $campagnesRes["success"] ? $campagnesRes["campagnes"] : [];
       <div class="footer-section">
         <h4>Informations</h4>
         <p>Réalisé par Céline ARKAM - Benjamin Zivic - Tsantan'ny avo Razoliferason</p>
+		  <a href="plan.php">Plan du site</a>
       </div>
 
       <div class="footer-section">
