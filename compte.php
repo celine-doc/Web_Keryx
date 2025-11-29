@@ -96,11 +96,6 @@ if (!isset($_SESSION["user_id"])) {
       </div>
 
       <div class="footer-section">
-        <h4>Contacts</h4>
-
-      </div>
-
-      <div class="footer-section">
         <h4>Organisme</h4>
         <p>CY Cergy Paris Université © 2025</p>
         <p>Mis à jour le : <strong>30/11/2025</strong></p>
