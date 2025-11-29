@@ -103,7 +103,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <nav>
       <ul>
         <li><a href="index.php">Accueil</a></li>
-        <li><a href="index.php">Mon compte</a></li>
       </ul>
     </nav>
 </header>
@@ -136,11 +135,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
       <div class="footer-section">
         <h4>Informations</h4>
         <p>Réalisé par Céline ARKAM - Benjamin Zivic - Tsantan'ny avo Razoliferason</p>
-      </div>
-
-      <div class="footer-section">
-        <h4>Contacts</h4>
-
       </div>
 
       <div class="footer-section">
