@@ -63,6 +63,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </head>
 <body>
     <header>
+        <div class="header-left">
+        <a href="a_propos.php" class="logo">À propos du site</a>
+      </div>
     <nav>
       <ul>
         <li><a href="index.php">Accueil</a></li>
@@ -103,6 +106,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
       <div class="footer-section">
         <h4>Informations</h4>
         <p>Réalisé par Céline ARKAM - Benjamin Zivic - Tsantan'ny avo Razoliferason</p>
+          <a href="plan.php">Plan du site</a>
       </div>
 
       <div class="footer-section">
@@ -115,5 +119,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 </body>
 </html>
+
 
 
