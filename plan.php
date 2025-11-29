@@ -10,6 +10,9 @@
 </head>
 <body>
     <header>
+        <div class="header-left">
+        <a href="a_propos.php" class="logo">À propos du site</a>
+      </div>
         <nav>
             <ul>
                 <li><a href="index.php">Accueil</a></li>
@@ -51,4 +54,5 @@
         </div>
     </footer>
 </body>
+
 </html>
