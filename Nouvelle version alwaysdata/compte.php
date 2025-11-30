@@ -10,7 +10,7 @@ if (!isset($_SESSION["user_id"])) {
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"/>
     <title>Espace Utilisateur - Kéryx</title>
     <link rel="stylesheet" href="./css/styles.css"/>
     <link rel="shortcut icon" type="image/jpg" href="./images/favicon.jpg"/>
@@ -111,4 +111,3 @@ if (!isset($_SESSION["user_id"])) {
 
 </body>
 </html>
-
