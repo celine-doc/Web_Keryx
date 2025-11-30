@@ -3,8 +3,13 @@ require_once __DIR__ . '/db.php';
 
 function registUser(string $nom, string $prenom, string $password): array {
 
-    /*
-    Fonction permettant de créer un nouveau compte Keryx
+    /** 
+    *Fonction permettant de créer un nouveau compte Keryx
+    *
+    * @param string $nom nom de l'utilisateur
+    * @param string $prenom prenom de l'utilisateur
+    * @param string $password mdp de l'utilisateur
+    * @return array Tableau avec success et données ou message d'erreur
     */
 
     $db = getDb();

@@ -1,10 +1,21 @@
 <?php
 session_start();
 
-// appelle api.php
+ if (isset($_GET['logout'])){
+    echo "<p class ='message'>
+        Vous avez été déconnecté avec succès.
+    </p>";
+ }
+
 function callApi(string $action, array $data = []): array {
 
-    // Ajouter l'action dans les données postées
+      /**
+     * Fonction qui va appeler api.php
+     * 
+     * @param string $action l'action à performer
+     * @param array $data les informations saisies
+     * @return array un tableau d'erreur ou de message
+     */
     $data['action'] = $action;
 
     $ch = curl_init('http://keryx.alwaysdata.net/api.php');
@@ -23,7 +34,7 @@ function callApi(string $action, array $data = []): array {
     if ($response === false) {
         $error = curl_error($ch);
         curl_close($ch);
-        return ['success' => false, 'error' => 'Erreur cURL : ' . $error];
+        return ['success' => false, 'error' => 'Erreur cURL  ' . $error];
     }
 
     curl_close($ch);
@@ -31,7 +42,7 @@ function callApi(string $action, array $data = []): array {
     // Décodage JSON
     $decoded = json_decode($response, true);
     if ($decoded === null) {
-        return ['success' => false, 'error' => 'Réponse invalide : ' . $response];
+        return ['success' => false, 'error' => 'Réponse invalide  ' . $response];
     }
 
     return $decoded;
@@ -204,6 +215,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <h4>Informations</h4>
         <p>Réalisé par Céline ARKAM - Benjamin Zivic - Tsantan'ny avo Razoliferason</p>
           <a href="plan.php">Plan du site</a>
+          <?php 
+            if (isset($_SESSION['user_id'])){
+           echo "<a href='deconnexion.php'>Déconnexion</a>";
+            }
+          ?>
       </div>
 
       <div class="footer-section">

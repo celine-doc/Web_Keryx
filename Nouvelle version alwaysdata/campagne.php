@@ -1,5 +1,9 @@
 <?php
 session_start();
+if (!isset($_SESSION['user_id'])) { 
+    header('Location: index.php'); 
+    exit; 
+}
 
 require_once __DIR__ . "/include/creerCampagne.php";
 require_once __DIR__ . "/include/recupCampagnes.php";
@@ -181,6 +185,7 @@ $campagnes = $campagnesRes["success"] ? $campagnesRes["campagnes"] : [];
         <h4>Informations</h4>
         <p>Réalisé par Céline ARKAM - Benjamin Zivic - Tsantan'ny avo Razoliferason</p>
 		  <a href="plan.php">Plan du site</a>
+          <a href="deconnexion.php">Déconnexion</a>
       </div>
 
       <div class="footer-section">

@@ -1,9 +1,18 @@
 <?php
 session_start();
-if (!isset($_SESSION['user_id'])) { header('Location: index.php'); exit; }
+if (!isset($_SESSION['user_id'])) {
+    header('Location: index.php'); 
+    exit;
+}
 
-// appelle api.php
 function callApi(string $action, array $data = []): array {
+    /**
+     * Fonction qui va appeler api.php
+     * 
+     * @param string $action l'action à performer
+     * @param array $data les informations saisies
+     * @return array un tableau d'erreur ou de message
+     */
     $data['action'] = $action;
     $ch = curl_init('http://keryx.alwaysdata.net/api.php');
     curl_setopt_array($ch, [
@@ -190,6 +199,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['troncon'])) {
         <h4>Informations</h4>
         <p>Réalisé par Céline ARKAM - Benjamin Zivic - Tsantan'ny avo Razoliferason</p>
           <a href="plan.php">Plan du site</a>
+          <a href="deconnexion.php">Déconnexion</a>
       </div>
 
       <div class="footer-section">

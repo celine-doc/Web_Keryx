@@ -1,5 +1,9 @@
 <?php
 session_start();
+if (!isset($_SESSION['user_id'])) { 
+    header('Location: index.php'); 
+    exit; 
+}
 
 $confirmation = "";
 $erreur = "";
@@ -60,6 +64,77 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <link rel="stylesheet" href="./css/styles.css"/>
     <link rel="shortcut icon" type="image/jpg" href="./images/favicon.jpg"/>
     <title>Message- Kéryx</title>
+            <style>
+            .mess-form {
+                max-width: 500px;
+                margin: 30px auto;
+                padding: 25px;
+                background-color: #f9fafb;
+                border: 1px solid #e2e8f0;
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+                font-family: Arial, sans-serif;
+            }
+
+            .mess-form label {
+                font-weight: 600;
+                color: #2b6cb0;
+                margin-bottom: 5px;
+            }
+
+            .mess-form input[type="text"],
+            .mess-form input[type="number"],
+            .mess-form input[type="datetime-local"],
+            .mess-form textarea {
+                padding: 10px;
+                border: 1px solid #cbd5e0;
+                border-radius: 6px;
+                font-size: 1em;
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            .mess-form textarea {
+                resize: vertical;
+                min-height: 80px;
+            }
+
+            .mess-form input[type="submit"] {
+                background-color: #5C7CFA;
+                color: #fff;
+                font-weight: 600;
+                padding: 12px;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                transition: background-color 0.3s ease, transform 0.2s ease;
+            }
+
+            .mess-form input[type="submit"]:hover {
+                background-color: #4A67D9;
+                transform: translateY(-2px);
+            }
+
+            .mess-form button[type="submit"] {
+                background-color: #5C7CFA;
+                color: #fff;
+                font-weight: 600;
+                padding: 12px;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                transition: background-color 0.3s ease, transform 0.2s ease;
+            }
+
+            .mess-form button[type="submit"]:hover {
+                background-color: #4A67D9;
+                transform: translateY(-2px);
+            }
+
+        </style>
 </head>
 <body>
     <header>
@@ -77,7 +152,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   <?php if (!empty($confirmation)) echo "<p style='color:green'>$confirmation</p>"; ?>
   <?php if (!empty($erreur)) echo "<p style='color:red'>$erreur</p>"; ?>
  <section>
-    <form method="post" enctype="multipart/form-data">
+    <form class="mess-form" method="post" enctype="multipart/form-data">
     <label>Entrez le message ici</label>
     <textarea name="texte" required></textarea><br>
 
@@ -107,6 +182,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <h4>Informations</h4>
         <p>Réalisé par Céline ARKAM - Benjamin Zivic - Tsantan'ny avo Razoliferason</p>
           <a href="plan.php">Plan du site</a>
+          <a href="deconnexion.php">Déconnexion</a>
+
       </div>
 
       <div class="footer-section">

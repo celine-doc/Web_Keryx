@@ -2,6 +2,12 @@
 require_once __DIR__ . "/db.php";
 
 function creerMessage($data) {
+    /**
+     * Fonction permettant d'insérer un nouveau message
+     * 
+     * @param array $data les informations saisies
+     * @return array un tableau d'erreur ou de message
+     */
     $texte   = $data["texte"] ?? "";
     $type    = $data["type"] ?? "Texte";
     $auteur  = $data["auteur"] ?? "";

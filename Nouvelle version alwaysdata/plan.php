@@ -29,7 +29,7 @@
         <ul>
             <li><a href="index.php">Accueil</a></li>
             <li><a href="compte.php">Mon compte</a></li>
-            <li><a href="afficheurs.php">Rechercher les afficheurs par tronçon</a></li>
+            <li><a href="afficheur.php">Rechercher les afficheurs par tronçon</a></li>
             <li><a href="message.php">Ajouter un message</a></li>
             <li><a href="campagne.php">Voir les Campagnes en cours</a></li>
             <li><a href="a_propos.php"> à propos du site </a></li>
@@ -44,6 +44,11 @@
                 <h4>Informations</h4>
                 <p>Réalisé par Céline ARKAM - Benjamin Zivic - Tsantan'ny avo Razoliferason</p>
                 <a href="plan.php">Plan du site</a>
+                    <?php 
+                        if (isset($_SESSION['user_id'])){
+                            echo "<a href='deconnexion.php'>Déconnexion</a>";
+                        }
+                    ?>
             </div>
             
             <div class="footer-section">

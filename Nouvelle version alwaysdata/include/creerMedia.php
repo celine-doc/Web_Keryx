@@ -2,6 +2,12 @@
 require_once __DIR__ . "/db.php";
 
 function creerMedia($data) {
+        /** 
+    *Fonction permettant d'insérer une image dans la base de données
+    *
+    * @param array $data les informations de l'image
+    * @return array Tableau avec success et données ou message d'erreur
+    */
     $nom_fichier = $data['nom_fichier'] ?? '';
     $donnees     = $data['donnees'] ?? '';
     $taille      = $data['taille'] ?? 0;

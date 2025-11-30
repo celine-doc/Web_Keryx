@@ -96,7 +96,8 @@ if (!isset($_SESSION["user_id"])) {
       <div class="footer-section">
         <h4>Informations</h4>
         <p>Réalisé par Céline ARKAM - Benjamin Zivic - Tsantan'ny avo Razoliferason</p>
-          <a href="plan.php">Plan du site</a>
+            <a href="plan.php">Plan du site</a>
+            <a href="deconnexion.php">Déconnexion</a>
       </div>
 
       <div class="footer-section">

@@ -3,6 +3,11 @@
 // communique avec la VM BDD 
 
 function getDb() {
+    /** 
+    * Permet la connexion à la BDD
+    *
+    * @return array Les tables ou informations obtenues à partir des requêtes
+    */
     static $db = null;
 
     if ($db === null) {

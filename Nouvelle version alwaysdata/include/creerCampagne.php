@@ -2,6 +2,12 @@
 require_once __DIR__ . "/db.php";
 
 function creerCampagne($data) {
+    /** 
+    *Fonction permettant d'insérer une nouvelle campagne
+    *
+    * @param array $data les infos saisies
+    * @return array Tableau avec success et données ou message d'erreur
+    */
     $nom   = $data["nom_camp"] ?? "";
     $desc  = $data["description"] ?? "";
     $prio  = $data["priorite_camp"] ?? 0;

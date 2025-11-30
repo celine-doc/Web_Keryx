@@ -3,8 +3,13 @@ require_once __DIR__ . '/db.php';
 
 function loginUser(string $nom,string $prenom, string $password): array
 {
-    /* Fonction vérifiant les informations de connexion à partir des informations saisies dans le formulaire et des données utilisateur dans la base de données
+    /** Fonction vérifiant les informations de connexion à partir des informations saisies dans le formulaire et des données utilisateur dans la base de données
+    * @param string $nom nom de l'utilisateur
+    * @param string $prenom prenom de l'utilisateur
+    * @param string $password mdp de l'utilisateur
+    * @return array Tableau avec success et données ou message d'erreur
     */
+    
     // Requête qui prends les lignes correspondant aux informations (nom, prenom, mdp) données
     $db = getDb();
     $sql = "SELECT code_utilisateur, nom, prenom, mot_de_passe_hache 
