@@ -14,7 +14,7 @@ function callApi(string $action, array $data = []): array {
      * @return array un tableau d'erreur ou de message
      */
     $data['action'] = $action;
-    $ch = curl_init('http://keryx.alwaysdata.net/api.php');
+    $ch = curl_init('https://celine-arkam.alwaysdata.net/api.php');
     curl_setopt_array($ch, [
         CURLOPT_POST => true,
         CURLOPT_POSTFIELDS => http_build_query($data),
@@ -61,9 +61,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['troncon'])) {
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="./css/styles.css">
-    <link rel="shortcut icon" type="image/jpg" href="./images/favicon.jpg">
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="./css/styles.css"/>
+    <link rel="shortcut icon" type="image/jpg" href="./images/favicon.jpg"/>
     <title>Afficheurs - Kéryx</title>
 
     <style>
@@ -212,4 +212,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['troncon'])) {
 
 </body>
 </html>
-
