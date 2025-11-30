@@ -21,3 +21,4 @@ function getPanneauxByTroncon(string $codeTroncon): array
     }
     return $panneaux;
 }
+?>
