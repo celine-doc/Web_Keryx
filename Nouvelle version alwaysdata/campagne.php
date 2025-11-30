@@ -38,7 +38,7 @@ $campagnes = $campagnesRes["success"] ? $campagnesRes["campagnes"] : [];
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="stylesheet" href="./css/styles.css"/>
     <link rel="shortcut icon" type="image/jpg" href="./images/favicon.jpg"/>
@@ -129,19 +129,19 @@ $campagnes = $campagnesRes["success"] ? $campagnesRes["campagnes"] : [];
     <?php if ($erreur) echo "<p class='messageErreur'>$erreur</p>"; ?>
 
     <form class= "camp-form" method="post" action="campagne.php">
-        <label for="nom_camp">Nom de la campagne :</label><br>
-        <input type="text" id="nom_camp" name="nom_camp" required><br><br>
+        <label for="nom_camp">Nom de la campagne :</label><br />
+        <input type="text" id="nom_camp" name="nom_camp" required="required"/><br /><br />
 
-        <label for="description">Description :</label><br>
-        <textarea id="description" name="description"></textarea><br><br>
+        <label for="description">Description :</label><br />
+        <textarea id="description" name="description"></textarea><br /><br />
 
-        <label for="priorite_camp">Priorité (0 à 10) :</label><br>
-        <input type="number" id="priorite_camp" name="priorite_camp" min="0" max="10" value="0"><br><br>
+        <label for="priorite_camp">Priorité (0 à 10) :</label><br />
+        <input type="number" id="priorite_camp" name="priorite_camp" min="0" max="10" value="0"/><br /><br />
 
-        <label for="planifie_pour">Planifiée pour :</label><br>
-        <input type="datetime-local" id="planifie_pour" name="planifie_pour"><br><br>
+        <label for="planifie_pour">Planifiée pour :</label><br />
+        <input type="datetime-local" id="planifie_pour" name="planifie_pour"/><br /><br />
 
-        <input type="submit" value="Créer la campagne">
+        <input type="submit" value="Créer la campagne"/>
     </form>
 
 </section>
@@ -174,7 +174,7 @@ $campagnes = $campagnesRes["success"] ? $campagnesRes["campagnes"] : [];
             echo "</ul>";
         }
         ?>
-        <hr>
+        <hr />
     <?php endforeach; ?>
 <?php endif; ?>
     </section>
