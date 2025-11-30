@@ -34,7 +34,7 @@
        <section>
           <h2>Version et contexte</h2>
           <p>
-             Version actuelle : <strong>1.0</strong> (mise à jour : 30/11/2025).<br>
+             Version actuelle : <strong>1.0</strong> (mise à jour : 30/11/2025).
              L’objectif principal a été de concevoir une plateforme fonctionnelle et pratique pour la gestion des affichages autoroutiers, 
              tout en appliquant nos connaissances en développement web et en gestion de bases de données. 
              Nous espérons que cette première version servira de base pour améliorer et enrichir l’outil dans le futur.
@@ -48,7 +48,7 @@
             <ul>
                 <li><strong>Céline ARKAM :</strong> 📧 <a href="mailto:celine.arkam@etu.cyu.fr">celine.arkam@etu.cyu.fr</a></li>
                 <li><strong>Benjamin Zivic :</strong> 📧 <a href="mailto:benjamin.zivic@etu.cyu.fr">benjamin.zivic@etu.cyu.fr</a></li>
-                <li><strong>Tsantan'ny avo Razoliferason :</strong> 📧 <a href="mailto:tsantanny-avo.razoliferason@etu.cyu.fr">tsantanny-avo.razoliferason@etu.cyu.fr</a></li>
+                <li><strong>Tsantan'ny avo Razoliferason :</strong> 📧 <a href="mailto:tsantany.razoliferason@etu.cyu.fr">tsantany.razoliferason@etu.cyu.fr</a></li>
             </ul>
         </section>
     </main>
@@ -69,5 +69,4 @@
         </div>
     </footer>
 </body>
-
 </html>
