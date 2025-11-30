@@ -1,4 +1,4 @@
-<?php
+ <?php
 session_start();
 
  if (isset($_GET['logout'])){
@@ -18,7 +18,7 @@ function callApi(string $action, array $data = []): array {
      */
     $data['action'] = $action;
 
-    $ch = curl_init('http://keryx.alwaysdata.net/api.php');
+    $ch = curl_init('https://celine-arkam.alwaysdata.net/api.php');
 
     curl_setopt_array($ch, [
         CURLOPT_POST            => true,
@@ -183,11 +183,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
      <form class="login-form" method="post">
         <input type="hidden" name="action" value="login"/>
         <label>Nom :</label>
-        <input type="text" name="nom" required/>
+        <input type="text" name="nom" required="required" />
         <label>Prenom :</label>
-        <input type="text" name="prenom" required/>
+        <input type="text" name="prenom" required="required"/>
         <label>Mot de passe :</label>
-        <input type="password" name="password" required/>
+        <input type="password" name="password" required="required"/>
         <input type="submit" value="Se connecter"/>
      </form>
     </section>
@@ -200,11 +200,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
      <form class="login-form" method="post">
         <input type="hidden" name="action" value="register"/>
         <label>Nom :</label>
-        <input type="text" name="nom" required/>
+        <input type="text" name="nom" required="required"/>
         <label>Prenom :</label>
-        <input type="text" name="prenom" required/>
+        <input type="text" name="prenom" required="required"/>
         <label>Mot de passe :</label>
-        <input type="password" name="password" required/>
+        <input type="password" name="password" required="required"/>
         <input type="submit" value="S'inscrire"/>
      </form>
     </section>
@@ -232,5 +232,4 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 </body>
 </html>
-
 
