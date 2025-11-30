@@ -154,7 +154,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
  <section>
     <form class="mess-form" method="post" enctype="multipart/form-data">
     <label>Entrez le message ici</label>
-    <textarea name="texte" required></textarea><br>
+    <textarea name="texte" required="required"></textarea><br />
 
     <label>Type de message</label>
     <select name="type">
@@ -163,14 +163,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <option value="TexteEtImage">Texte + Image</option>
     </select>
     <label>Liste des tronçons</label>
-    <select name="troncon" required>
+    <select name="troncon" required="required">
         <?php foreach ($troncons as $t): ?>
             <option value="<?= htmlspecialchars($t["code_troncon"]) ?>"><?= htmlspecialchars($t["nom_troncon"]) ?></option>
         <?php endforeach; ?>
     </select>
 
     <label>Image</label>
-    <input type="file" name="media_image" accept="image/*"><br>
+    <input type="file" name="media_image" accept="image/*"/><br />
     <button type="submit">Créer</button>
     </form>
 
@@ -196,6 +196,5 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 </body>
 </html>
-
 
 
